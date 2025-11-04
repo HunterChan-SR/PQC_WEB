@@ -25,6 +25,12 @@
             margin-bottom: 1rem !important;
         }
 
+        .algorithm-name-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            /* 控制间距，可调大如 10px、12px */
+        }
 
         .nist-container {
             display: grid;
@@ -298,6 +304,47 @@
                 font-size: 0.9rem;
             }
         }
+
+        /* --- Purpose 标签颜色样式 --- */
+        .algorithm-purpose-tag {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* 加密类：浅蓝 + 蓝色展开 */
+        .algorithm-purpose-tag.encrypt {
+            background-color: #e6f3ff;
+            color: #1e88e5;
+        }
+
+        .algorithm-header.active .algorithm-purpose-tag.encrypt {
+            background-color: #1e88e5;
+            color: #fff;
+        }
+
+        /* 签名类：浅红 + 红色展开 */
+        .algorithm-purpose-tag.sign {
+            background-color: #ffeaea;
+            color: #e53935;
+        }
+
+        .algorithm-header.active .algorithm-purpose-tag.sign {
+            background-color: #e53935;
+            color: #fff;
+        }
+
+        /* 其他情况的默认灰色标签 */
+        .algorithm-purpose-tag.default {
+            background-color: #f0f0f0;
+            color: #555;
+        }
+
+        .algorithm-header.active .algorithm-purpose-tag.default {
+            background-color: #555;
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -334,37 +381,37 @@
             </p>
 
             <div class="nist-container">
-                <!-- 第一轮部分落选/合并算法 -->
                 <div class="review-phase">
-                    <div class="review-phase-header">
-                        <i class="fas fa-list-ol"></i>
-                        第一轮部分落选/合并算法
-                    </div>
-                    <div class="algorithm-list" id="round1-list">
-
-                    </div>
+                    <div class="review-phase-header"><i class="fas fa-list-ol"></i> 第一轮落选算法</div>
+                    <div class="algorithm-list" id="round1-list"></div>
                 </div>
 
-                <!-- 第二轮落选算法 -->
                 <div class="review-phase">
-                    <div class="review-phase-header">
-                        <i class="fas fa-list-ol"></i>
-                        第二轮落选算法
-                    </div>
-                    <div class="algorithm-list" id="round2-list">
-                    </div>
+                    <div class="review-phase-header"><i class="fas fa-list-ol"></i> 第二轮落选算法</div>
+                    <div class="algorithm-list" id="round2-list"></div>
                 </div>
 
-                <!-- 第三轮落选算法 -->
                 <div class="review-phase">
-                    <div class="review-phase-header">
-                        <i class="fas fa-list-ol"></i>
-                        第三轮落选算法
-                    </div>
-                    <div class="algorithm-list" id="round3-list">
-                    </div>
+                    <div class="review-phase-header"><i class="fas fa-list-ol"></i> 第三轮落选算法</div>
+                    <div class="algorithm-list" id="round3-list"></div>
+                </div>
+
+                <div class="review-phase">
+                    <div class="review-phase-header"><i class="fas fa-list-ol"></i> 第四轮落选算法</div>
+                    <div class="algorithm-list" id="round4-list"></div>
+                </div>
+
+                <div class="review-phase">
+                    <div class="review-phase-header"><i class="fas fa-list-ol"></i> 额外第一轮落选算法</div>
+                    <div class="algorithm-list" id="round1-extra-list"></div>
+                </div>
+
+                <div class="review-phase">
+                    <div class="review-phase-header"><i class="fas fa-list-ol"></i> 额外第二轮落选算法</div>
+                    <div class="algorithm-list" id="round2-extra-list"></div>
                 </div>
             </div>
+
 
 
 
@@ -490,25 +537,36 @@
         }
 
         function createAlgorithmHTML(algorithm) {
+            const algorithmName = algorithm["algorithmName"] || "未命名算法";
+            let purposeClass = "default";
+            if (algorithm["purpose"] && algorithm["purpose"].includes("加密")) {
+                purposeClass = "encrypt";
+            } else if (algorithm["purpose"] && algorithm["purpose"].includes("签名")) {
+                purposeClass = "sign";
+            }
+            const purpose = algorithm["purpose"]
+                ? `<span class="algorithm-purpose-tag ${purposeClass}">${algorithm["purpose"]}</span>`
+                : "";
+
+            const problemType = algorithm["problemType"] ? `<span class="algorithm-problem">${algorithm["problemType"]}</span>` : "";
+
             return `
         <div class="algorithm-accordion">
             <div class="algorithm-header" onclick="toggleAlgorithm(this)">
-                <span class="algorithm-name">${algorithm["algorithmName"] || "未命名算法"}</span>
+                <div class="algorithm-name-line">
+                    <span class="algorithm-name">${algorithmName}</span>
+                    ${purpose ? `<span class="algorithm-purpose-tag">${purpose}</span>` : ""}
+                    ${problemType ? `<span class="algorithm-problem-tag">${problemType}</span>` : ""}
+                </div>
                 <i class="fas fa-chevron-down accordion-icon"></i>
             </div>
             <div class="algorithm-content">
                 <div class="algorithm-details">
-
-                    ${algorithm["purpose"] ? `
+                    
+                    ${algorithm["author"] ? `
                     <div class="detail-item">
-                        <div class="detail-label"><i class="fas fa-bullseye"></i>用途</div>
-                        <div class="detail-value">${algorithm["purpose"]}</div>
-                    </div>` : ''}
-
-                    ${algorithm["problemType"] ? `
-                    <div class="detail-item">
-                        <div class="detail-label"><i class="fas fa-brain"></i>困难问题类型</div>
-                        <div class="detail-value">${algorithm["problemType"]}</div>
+                        <div class="detail-label"><i class="fas fa-user"></i>作者</div>
+                        <div class="detail-value">${algorithm["author"]}</div>
                     </div>` : ''}
 
                     ${algorithm["hardProblem"] ? `
@@ -558,7 +616,6 @@
         </div>
     `;
         }
-
 
         function renderAlgorithms(algorithms, containerId) {
             const container = document.getElementById(containerId);
@@ -667,6 +724,16 @@
                 if (data.round3 && Array.isArray(data.round3)) {
                     renderAlgorithms(data.round3, 'round3-list');
                 }
+                if (data.round4 && Array.isArray(data.round4)) {
+                    renderAlgorithms(data.round4, 'round4-list');
+                }
+                if (data.round1_extra && Array.isArray(data.round1_extra)) {
+                    renderAlgorithms(data.round1_extra, 'round1-extra-list');
+                }
+                if (data.round2_extra && Array.isArray(data.round2_extra)) {
+                    renderAlgorithms(data.round2_extra, 'round2-extra-list');
+                }
+
                 if (data.selected && Array.isArray(data.selected)) {
                     const container = document.getElementById('selected-list');
                     if (container) {
@@ -699,6 +766,16 @@
             setupSmartNavbar();
             loadAlgorithms();
         });
+
+
+        function goToHome() {
+            window.location.href = 'index.html';
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
     </script>
 </body>
 
