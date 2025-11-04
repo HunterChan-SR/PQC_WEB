@@ -1,0 +1,41 @@
+[
+    {
+        "algorithmName": "Classic McEliece",
+        "purpose": "密钥封装",
+        "hardProblemType": "编码",
+        "hardProblem": "Syndrome Decoding (SD) problem of Binary Goppa Code",
+        "author": "Daniel J. Bernstein 等",
+        "officialSite": "https://classic.mceliece.org/",
+        "sourceCode": "https://github.com/open-quantum-safe/liboqs/tree/main/src/kem/classic_mceliece",
+        "standardDoc": "https://classic.mceliece.org/mceliece-spec-20221023.pdf",
+        "allComments": "https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/Classic-McEliece-official-comment.pdf\r\n\r\nhttps://csrc.nist.gov/CSRC/media/Projects/post-quantum-cryptography/documents/round-2/official-comments/Classic-McEliece-round2-official-comment.pdf\r\n\r\nhttps://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/round-3/official-comments/Classic-McEliece-round3-official-comment.pdf\r\n\r\nhttps://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/round-4/official-comments/classic-mceliece-round4-official-comment.pdf",
+        "description": "Classic McEliece 是基于二元 Goppa 码的代码类密钥封装方案 （KEM），安全性建立在随机线性码译码/综合译码困难问题（以 ISD 类攻击复杂度为基线）的长期稳健假设上且无解密失败，封装/解封装速度快但公钥远大于格基方案（如 Kyber）带来更高带宽开销，以更保守的假设换取成熟安全性。",
+        "progress": "在 NIST 第四轮中被HQC击败，无缘NIST标准化。"
+    },
+    {
+        "algorithmName": "BIKE",
+        "purpose": "密钥封装",
+        "hardProblemType": "编码",
+        "hardProblem": "Syndrome Decoding (SD) problem of Quasi-Cyclic Moderate Density Parity-Check codes (QC-MDPC)",
+        "author": "Nicolas Aragon 等",
+        "officialSite": "http://bikesuite.org/",
+        "sourceCode": "https://github.com/open-quantum-safe/liboqs/tree/main/src/kem/bike",
+        "standardDoc": "https://bikesuite.org/files/v5.2/BIKE_Spec.2024.10.10.1.pdf",
+        "allComments": "https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/BIKE-official-comment.pdf\r\n\r\nhttps://csrc.nist.gov/CSRC/media/Projects/post-quantum-cryptography/documents/round-2/official-comments/BIKE-round2-official-comment.pdf\r\n\r\nhttps://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/round-4/official-comments/bike-round4-official-comment.pdf",
+        "description": "BIKE是一种基于准循环中密度奇偶校验（QC-MDPC）码、在 Niederreiter 框架下并经 FO 变换得到的后量子密钥封装方案（KEM），其安全性依赖于准循环码上的译码/码字寻找困难（以 ISD 类攻击复杂度为基线），性能上公钥与密文相对紧凑、实现硬件友好但存在需严格控制的解码失败率且解封装计算较重，适合短期一次性密钥场景。",
+        "progress": "在 NIST 第四轮中被HQC击败，无缘NIST标准化。"
+    },
+    {
+        "algorithmName": "SIKE",
+        "purpose": "密钥封装",
+        "hardProblemType": "同源",
+        "hardProblem": "Pseudo-Random Walks (PRW) problem in Supersingular Isogeny Graphs (SIG)",
+        "author": "David Jao 等",
+        "officialSite": "https://sike.org/",
+        "sourceCode": "https://github.com/Microsoft/PQCrypto-SIDH",
+        "standardDoc": "https://sike.org/files/SIDH-spec.pdf",
+        "allComments": "https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/SIKE-official-comment.pdf\r\n\r\nhttps://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-2/official-comments/SIKE-round2-official-comment.pdf\r\n\r\nhttps://csrc.nist.gov/CSRC/media/Projects/post-quantum-cryptography/documents/round-3/official-comments/SIKE-round3-official-comment.pdf\r\n\r\nhttps://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/round-4/submissions/sike-team-note-insecure.pdf",
+        "description": "SIKE（Supersingular Isogeny Key Encapsulation）是基于超奇异椭圆曲线同源（SIDH）的同源型 KEM，安全性原拟建立在超奇异曲线图上隐式核同源构造的难解性上，但已被实用攻击（Castryck–Decru 等）证实不安全、现不建议使用；相较格基/代码类方案其公钥/密文更小但计算更重、实现更复杂且已失去安全性。",
+        "progress": "SIKE 团队承认 SIKE 和 SIDH 不安全，不应使用。"
+    }
+]

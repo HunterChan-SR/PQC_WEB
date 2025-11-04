@@ -1,0 +1,32 @@
+算法名,算法用途,算法困难问题类型,具体算法困难问题,作者团队,官网链接,源代码链接,标准化文件链接,所有评论,算法特色简介,算法后续进展
+Crystals-Kyber,密钥封装,格,Module Learning With Errors (MLWE) problem,Peter Schwabe 等,https://pq-crystals.org/,https://github.com/open-quantum-safe/liboqs/tree/main/src/kem/ml_kem,https://doi.org/10.6028/NIST.FIPS.203,"https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/CRYSTALS-KYBER-official-comment.pdf
+
+https://csrc.nist.gov/CSRC/media/Projects/post-quantum-cryptography/documents/round-2/official-comments/CRYSTALS-DILITHIUM-round2-official-comment.pdf
+
+https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/round-3/official-comments/CRYSTALS-DILITHIUM-round3-official-comment.pdf
+
+https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/selected-algos-2022/official-comments/crystals-kyber-selected-algo-official-comment.pdf",CRYSTALS-Kyber 是一种基于 Module-LWE 问题的格基密钥封装机制（KEM），其安全性源自模块格中 LWE 的求解困难；相较于其他格基方案（如 NTRU、Frodo），Kyber 在结构与效率之间取得平衡——拥有更高的计算与带宽效率（得益于 NTT 优化与模块结构），同时保持可形式化的紧致安全归约与较低解密失败率，是目前性能、安全性与实现成熟度兼顾的主流标准方案。,在 NIST 第三轮中被接受为候选算法，已经成为NIST FIPS 203标准。
+CRYSTALS-Dilithium,签名,格,Module Learning With Errors (MLWE) problem and Module Short Integer Solution (MSIS) problem,Vadim Lyubashevsky 等,https://pq-crystals.org/,https://github.com/open-quantum-safe/liboqs/tree/main/src/sig/ml_dsa,https://doi.org/10.6028/NIST.FIPS.204,"https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/CRYSTALS-DILITHIUM-official-comment.pdf
+
+https://csrc.nist.gov/CSRC/media/Projects/post-quantum-cryptography/documents/round-2/official-comments/CRYSTALS-DILITHIUM-round2-official-comment.pdf
+
+https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/round-3/official-comments/CRYSTALS-DILITHIUM-round3-official-comment.pdf
+
+https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/selected-algos-2022/official-comments/crystals-dilithium-selected-algo-official-comment.pdf",CRYSTALS-Dilithium 是一种基于 Module-LWE 与 Module-SIS 难题的格基后量子数字签名方案，采用 Fiat–Shamir with Aborts 框架构造，避免离散高斯采样以增强实现安全性；在性能上通过 NTT 优化实现高效签名与验证，公钥与签名体积较小、实现简洁、抗侧信道性强，是目前标准化中安全性、可实现性与效率兼顾的主流格基签名方案。,在 NIST 第三轮中被接受为候选算法，已经成为NIST FIPS 204标准。
+FALCON,签名,格,Number Theory Research Unit (NTRU) problem,Thomas Prest 等,https://falcon-sign.info/,https://github.com/open-quantum-safe/liboqs/tree/main/src/sig/falcon,https://github.com/sageblue000/pqc_collect/blob/master/Supporting_Documentation/NIST_round3/Falcon/falcon.pdf,"https://csrc.nist.gov/CSRC/media/Projects/post-quantum-cryptography/documents/round-2/official-comments/FALCON-round2-official-comment.pdf
+
+https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/round-3/official-comments/FALCON-round3-official-comment.pdf
+
+https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/selected-algos-2022/official-comments/falcon-selected-algo-official-comment.pdf",Falcon 是基于 NTRU 格并实例化 GPV 哈希-签名框架、使用快速傅里叶采样的紧凑型格基数字签名方案，其安全性源于（NTRU-）SIS/格困难假设与 GPV 在 ROM/QROM 下的安全证明；性能上以小公钥+短签名、验签极快著称，但实现更为精细（浮点/高斯采样等），相较 Dilithium 往往更小更快验签、却在工程复杂度与实现难度上更高。,在 NIST 第三轮中被接受为候选算法，即将以标准化形式公布。
+SPHINCS+,签名,哈希,Pseudorandomness Assumption for Hash Function,Andreas Hulsing 等,https://sphincs.org/,https://github.com/open-quantum-safe/liboqs/tree/main/src/sig/slh_dsa,https://doi.org/10.6028/NIST.FIPS.205,"https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/Gravity-SPHINCS-official-comment.pdf
+
+https://csrc.nist.gov/CSRC/media/Projects/post-quantum-cryptography/documents/round-2/official-comments/Sphincs-Plus-round2-official-comment.pdf
+
+https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/round-3/official-comments/Sphincs-Plus-round3-official-comment.pdf
+
+https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/selected-algos-2022/official-comments/sphincs-plus-selected-algo-official-comment.pdf",SPHINCS+ 是一种无状态的哈希型后量子签名，安全性几乎仅依赖所用哈希函数（通过WOTS+/XMSS超树与FORS组合），相比格基方案公钥更小、实现更简单且抗侧信道更强，但签名体积较大、签署与验证速度更慢。,在 NIST 第三轮中被接受为候选算法，已经成为NIST FIPS 205标准。
+HQC,密钥封装,编码,Quasi-Cyclic Syndrome Decoding (QCSD) problem,Philippe Gaborit 等,http://pqc-hqc.org/,https://github.com/open-quantum-safe/liboqs/tree/main/src/kem/hqc,https://github.com/sageblue000/pqc_collect/blob/master/Supporting_Documentation/NIST_round3/HQC/HQC_Submission.pdf,"https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/HQC-official-comment.pdf
+
+https://csrc.nist.gov/CSRC/media/Projects/post-quantum-cryptography/documents/round-3/official-comments/HQC-round3-official-comment.pdf
+
+https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/round-4/official-comments/hqc-round4-official-comment.pdf",HQC 是一种基于准循环码（QC）在汉明度量下构建的编码类密钥封装方案（KEM），安全性依赖准循环码上的译码/码字寻找困难（以 ISD 类攻击复杂度为基线）；相较格基方案，其公钥/密文较紧凑、实现高效并给出严格的解密失败率（DFR）分析，但需谨慎处理失败率与实现细节。,在 NIST 第四轮中被接受为候选算法，即将以标准化形式公布。

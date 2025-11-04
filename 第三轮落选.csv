@@ -1,0 +1,32 @@
+算法名,算法用途,算法困难问题类型,具体算法困难问题,作者团队,官网链接,源代码链接,标准化文件链接,所有评论,算法特色简介,算法后续进展
+NTRU,密钥封装,格,Number Theory Research Unit (NTRU) problem,Cong Chen 等,https://ntru.org/,https://github.com/open-quantum-safe/liboqs/tree/main/src/kem/ntru,https://github.com/sageblue000/pqc_collect/tree/master/Supporting_Documentation/NIST_round3/NIST-PQ-Submission-NTRU-20201016,"https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/NTRU-HRSS-KEM-official-comment.pdf
+
+https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/NTRUEncrypt-official-comment.pdf
+
+https://csrc.nist.gov/CSRC/media/Projects/post-quantum-cryptography/documents/round-2/official-comments/NTRU-round2-official-comment.pdf
+
+https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/round-3/official-comments/NTRU-round3-official-comment.pdf",NTRU 是一种基于环上卷积理想格的格基密钥封装方案（KEM），其安全性来源于在 NTRU 格中寻找短向量等格约简的困难并通过 OW-CPA→IND-CCA2 的（ROM/QROM）归约论证；与其他格基 KEM（如 Kyber）相比，NTRU 在带宽与速度上大体相当、实现成熟且可做到完美正确性，但需处理多项式求逆等工程细节、尺寸与性能权衡略有差异。,在 NIST 第三轮中被FALCON击败，无缘NIST标准化。
+GeMSS,签名,多变量,Hardness of Solving Non-Linear Equations,A. Casanova 等,https://www-polsys.lip6.fr/Links/NIST/GeMSS.html,https://www-polsys.lip6.fr/~ryckeghem/packages/GeMSS-Round2_V2.zip,https://github.com/sageblue000/pqc_collect/blob/master/Supporting_Documentation/NIST_round3/GeMSS-Round3/specification.pdf,https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/GeMSS-official-comment.pdf,GeMSS 是一类基于隐藏域方程（HFE）框架的多变量签名方案，安全性意在依赖一般 MQ 难题及对 HFEv− 的最佳攻击复杂度；相较格基方案（如 Dilithium）其特点是公钥很大、签名很短、验签较快而签名偏慢，适合追求极短签名但不利于带宽与密钥存储。,在 NIST 第三轮中未能胜出，无缘NIST标准化。
+Rainbow,密钥封装,多变量,Multivariate Quadratic (MQ) Problem,Jintai Ding 等,https://www.pqcrainbow.org/,https://github.com/fast-crypto-lab/rainbow-submission-round2,https://github.com/sageblue000/pqc_collect/blob/master/Supporting_Documentation/NIST_round3/Rainbow/Rainbow3round.pdf,"https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/Rainbow-official-comment.pdf
+
+https://csrc.nist.gov/CSRC/media/Projects/post-quantum-cryptography/documents/round-2/official-comments/Rainbow-round2-official-comment.pdf
+
+https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/round-3/official-comments/RAINBOW-round3-official-comment.pdf",Rainbow 是一种基于多变量（MQ）难题的后量子签名方案，采用分层的非对称油醋结构 (UOV) 中心映射并以仿射变换隐藏成二次多项式组；性能上呈现“公钥很大、签名较短、验签较快但签名偏慢”，相较主流格基方案在带宽与密钥存储上不占优。,在 NIST 第三轮中未能胜出，无缘NIST标准化。
+NTRU Prime,密钥封装,格,Number Theory Research Unit (NTRU) problem,Daniel J. Bernstein 等,https://ntruprime.cr.yp.to/,https://github.com/open-quantum-safe/liboqs/tree/main/src/kem/ntruprime,https://github.com/sageblue000/pqc_collect/blob/master/Supporting_Documentation/NIST_round3/ntruprime-20201007/doc.pdf,"https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/NTRU-prime-official-comment.pdf
+
+https://csrc.nist.gov/CSRC/media/Projects/post-quantum-cryptography/documents/round-2/official-comments/NTRU-Prime-round2-official-comment.pdf
+
+https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/round-3/official-comments/NTRU-Prime-round3-official-comment.pdf",NTRU Prime 是在素数次数环上构建的 NTRU 系列 密钥封装方案（KEM）（含 Streamlined NTRU Prime 与 NTRU LPRime），以 NTRU/LWE 型格问题困难性为基础并刻意避开 cyclotomic/NTT 结构以缩小攻击面；性能上尺寸与速度具竞争力且可做到完美正确性，带宽/速度与主流格基方案相当而整体更保守。,在 NIST 第三轮中被FALCON击败，无缘NIST标准化。
+Saber,密钥封装,格,Module Learning With Errors (MLWE) problem,Jan-Pieter D'Anvers 等,https://www.esat.kuleuven.be/cosic/pqcrypto/saber/,https://github.com/KULeuven-COSIC/SABER,https://github.com/sageblue000/pqc_collect/blob/master/Supporting_Documentation/NIST_round3/SABER_KEM%20(Round%203)/SABER_specification_round3.pdf,"https://csrc.nist.gov/CSRC/media/Projects/post-quantum-cryptography/documents/round-2/official-comments/SABER-round2-official-comment.pdf
+
+https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/round-3/official-comments/SABER-round3-official-comment.pdf",SABER是一种基于模块学习取整（Mod-LWR）问题的密钥封装机制（KEM），其设计注重简洁性、效率和灵活性。在安全性方面，SABER的安全性依赖于核心最短向量问题（core-SVP），并且通过多种独立脚本进行安全估计。性能上，SABER利用2的幂次模数避免了模运算和拒绝采样，从而提高了实现效率，并且在不同平台上表现出良好的适应性。此外，SABER在侧信道攻击防护方面也表现出色，尤其是在使用模- LWR和2的幂次模数时，其掩码效率较高。,在 NIST 第三轮中未能胜出，无缘NIST标准化。
+Picnic,签名,MPCitH,Hardness of Hash and LowMC Function,Greg Zaverucha 等,https://microsoft.github.io/Picnic/,https://github.com/Microsoft/Picnic,https://github.com/sageblue000/pqc_collect/blob/master/Supporting_Documentation/NIST_round3/picnic_submission_round3/Picnic_Spec-v3.0.pdf,"https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/Picnic-official-comment.pdf
+
+https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-2/official-comments/Picnic-round2-official-comment.pdf
+
+https://csrc.nist.gov/CSRC/media/Projects/post-quantum-cryptography/documents/round-3/official-comments/PICNIC-round3-official-comment.pdf",Picnic 是一种基于对称密码与哈希的 MPC-in-the-Head 范式后量子签名，安全性依赖哈希（ROM/QROM 下的 Fiat–Shamir/Unruh）与所选函数（如 LowMC/AES）的伪随机/不可逆假设、无需格/码/多变量结构；优点是假设朴素、公钥小、实现贴近通用哈希/块密码，缺点是签名较大、验签偏慢，整体性能通常不如格基（如 Dilithium）或优化的哈希基（如 SPHINCS+）方案。,在 NIST 第三轮中未能胜出，无缘NIST标准化。
+FrodoKEM,密钥封装,格,Learning With Errors (LWE) problem,Michael Naehrig 等,http://frodokem.org/,https://github.com/open-quantum-safe/liboqs/tree/main/src/kem/frodokem,https://github.com/sageblue000/pqc_collect/blob/master/Supporting_Documentation/NIST_round3/FrodoKEM/specification-round-3.pdf,"https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/Frodo-official-comment.pdf
+
+https://csrc.nist.gov/CSRC/media/Projects/post-quantum-cryptography/documents/round-2/official-comments/FrodoKEM-round2-official-comment.pdf
+
+https://csrc.nist.gov/CSRC/media/Projects/post-quantum-cryptography/documents/round-3/official-comments/FrodoKEM-round3-official-comment.pdf",FrodoKEM 是一种基于传统整数矩阵上的标准 LWE（Learning With Errors）困难问题的后量子密钥封装算法，不依赖格结构（如 NTT/环），因此安全假设更“干净”、抗结构攻击更强，但代价是计算量和密钥体积都显著更大，相较于基于 Ring/Module-LWE 的方案（如 Kyber）更安全保守、性能更慢、实现更简单。,在 NIST 第三轮中未能胜出，无缘NIST标准化。

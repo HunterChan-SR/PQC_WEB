@@ -407,7 +407,7 @@
                 </div>
 
                 <div class="review-phase">
-                    <div class="review-phase-header"><i class="fas fa-list-ol"></i> 额外第二轮落选算法</div>
+                    <div class="review-phase-header"><i class="fas fa-list-ol"></i> 额外第二轮入选算法</div>
                     <div class="algorithm-list" id="round2-extra-list"></div>
                 </div>
             </div>
@@ -538,83 +538,100 @@
 
         function createAlgorithmHTML(algorithm) {
             const algorithmName = algorithm["algorithmName"] || "未命名算法";
+
+            // 用于区分加密/签名类型的标签颜色
             let purposeClass = "default";
-            if (algorithm["purpose"] && algorithm["purpose"].includes("加密")) {
+            if (algorithm["purpose"] && (algorithm["purpose"].includes("加密") || algorithm["purpose"].includes("密钥封装"))) {
                 purposeClass = "encrypt";
             } else if (algorithm["purpose"] && algorithm["purpose"].includes("签名")) {
                 purposeClass = "sign";
             }
+
             const purpose = algorithm["purpose"]
                 ? `<span class="algorithm-purpose-tag ${purposeClass}">${algorithm["purpose"]}</span>`
                 : "";
 
-            const problemType = algorithm["problemType"] ? `<span class="algorithm-problem">${algorithm["problemType"]}</span>` : "";
+            const hardProblemType = algorithm["hardProblemType"]
+                ? `<span class="algorithm-problem-tag">${algorithm["hardProblemType"]}</span>`
+                : "";
+
+            // 将多行评论拆分成链接列表
+            let commentsHTML = "";
+            if (algorithm["allComments"]) {
+                const commentLinks = algorithm["allComments"]
+                    .split(/\r?\n+/)
+                    .map(link => link.trim())
+                    .filter(link => link)
+                    .map(link => `<li><a href="${link}" target="_blank">${link}</a></li>`)
+                    .join("");
+                commentsHTML = `
+            <div class="detail-item">
+                <div class="detail-label"><i class="fas fa-comments"></i>所有评论</div>
+                <ul class="detail-value comment-list">${commentLinks}</ul>
+            </div>`;
+            }
 
             return `
-        <div class="algorithm-accordion">
-            <div class="algorithm-header" onclick="toggleAlgorithm(this)">
-                <div class="algorithm-name-line">
-                    <span class="algorithm-name">${algorithmName}</span>
-                    ${purpose ? `<span class="algorithm-purpose-tag">${purpose}</span>` : ""}
-                    ${problemType ? `<span class="algorithm-problem-tag">${problemType}</span>` : ""}
+                <div class="algorithm-accordion">
+                    <div class="algorithm-header" onclick="toggleAlgorithm(this)">
+                        <div class="algorithm-name-line">
+                            <span class="algorithm-name">${algorithmName}</span>
+                            ${purpose}
+                            ${hardProblemType}
+                        </div>
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </div>
+                    <div class="algorithm-content">
+                        <div class="algorithm-details">
+
+                            ${algorithm["hardProblem"] ? `
+                            <div class="detail-item">
+                                <div class="detail-label"><i class="fas fa-cubes"></i>具体困难问题</div>
+                                <div class="detail-value">${algorithm["hardProblem"]}</div>
+                            </div>` : ''}
+
+                            ${algorithm["author"] ? `
+                            <div class="detail-item">
+                                <div class="detail-label"><i class="fas fa-user"></i>作者团队</div>
+                                <div class="detail-value">${algorithm["author"]}</div>
+                            </div>` : ''}
+
+                            ${algorithm["officialSite"] ? `
+                            <div class="detail-item">
+                                <div class="detail-label"><i class="fas fa-globe"></i>官网链接</div>
+                                <div class="detail-value"><a href="${algorithm["officialSite"]}" target="_blank">${algorithm["officialSite"]}</a></div>
+                            </div>` : ''}
+
+                            ${algorithm["sourceCode"] ? `
+                            <div class="detail-item">
+                                <div class="detail-label"><i class="fas fa-code"></i>源代码链接</div>
+                                <div class="detail-value"><a href="${algorithm["sourceCode"]}" target="_blank">${algorithm["sourceCode"]}</a></div>
+                            </div>` : ''}
+
+                            ${algorithm["standardDoc"] ? `
+                            <div class="detail-item">
+                                <div class="detail-label"><i class="fas fa-file-alt"></i>标准化文件连接</div>
+                                <div class="detail-value"><a href="${algorithm["standardDoc"]}" target="_blank">${algorithm["standardDoc"]}</a></div>
+                            </div>` : ''}
+
+                            ${commentsHTML}
+
+                            ${algorithm["description"] ? `
+                            <div class="detail-item">
+                                <div class="detail-label"><i class="fas fa-info-circle"></i>算法特色简介</div>
+                                <div class="detail-value">${algorithm["description"]}</div>
+                            </div>` : ''}
+
+                            ${algorithm["progress"] ? `
+                            <div class="detail-item">
+                                <div class="detail-label"><i class="fas fa-forward"></i>算法后续进展</div>
+                                <div class="detail-value">${algorithm["progress"]}</div>
+                            </div>` : ''}
+
+                        </div>
+                    </div>
                 </div>
-                <i class="fas fa-chevron-down accordion-icon"></i>
-            </div>
-            <div class="algorithm-content">
-                <div class="algorithm-details">
-                    
-                    ${algorithm["author"] ? `
-                    <div class="detail-item">
-                        <div class="detail-label"><i class="fas fa-user"></i>作者</div>
-                        <div class="detail-value">${algorithm["author"]}</div>
-                    </div>` : ''}
-
-                    ${algorithm["hardProblem"] ? `
-                    <div class="detail-item">
-                        <div class="detail-label"><i class="fas fa-cubes"></i>具体困难问题</div>
-                        <div class="detail-value">${algorithm["hardProblem"]}</div>
-                    </div>` : ''}
-
-                    ${algorithm["description"] ? `
-                    <div class="detail-item">
-                        <div class="detail-label"><i class="fas fa-info-circle"></i>算法特色简介</div>
-                        <div class="detail-value">${algorithm["description"]}</div>
-                    </div>` : ''}
-
-                    ${algorithm["progress"] ? `
-                    <div class="detail-item">
-                        <div class="detail-label"><i class="fas fa-forward"></i>算法后续进展</div>
-                        <div class="detail-value">${algorithm["progress"]}</div>
-                    </div>` : ''}
-
-                    ${algorithm["officialWebsite"] ? `
-                    <div class="detail-item">
-                        <div class="detail-label"><i class="fas fa-globe"></i>官网链接</div>
-                        <div class="detail-value"><a href="${algorithm["officialWebsite"]}" target="_blank">${algorithm["officialWebsite"]}</a></div>
-                    </div>` : ''}
-
-                    ${algorithm["sourceCode"] ? `
-                    <div class="detail-item">
-                        <div class="detail-label"><i class="fas fa-code-branch"></i>源代码链接</div>
-                        <div class="detail-value"><a href="${algorithm["sourceCode"]}" target="_blank">${algorithm["sourceCode"]}</a></div>
-                    </div>` : ''}
-
-                    ${algorithm["documentation"] ? `
-                    <div class="detail-item">
-                        <div class="detail-label"><i class="fas fa-book"></i>文档链接</div>
-                        <div class="detail-value"><a href="${algorithm["documentation"]}" target="_blank">${algorithm["documentation"]}</a></div>
-                    </div>` : ''}
-
-                    ${algorithm["standardizationDocument"] ? `
-                    <div class="detail-item">
-                        <div class="detail-label"><i class="fas fa-file-alt"></i>标准化文件链接</div>
-                        <div class="detail-value"><a href="${algorithm["standardizationDocument"]}" target="_blank">${algorithm["standardizationDocument"]}</a></div>
-                    </div>` : ''}
-
-                </div>
-            </div>
-        </div>
-    `;
+                `;
         }
 
         function renderAlgorithms(algorithms, containerId) {
