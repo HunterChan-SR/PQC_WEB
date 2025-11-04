@@ -505,52 +505,52 @@
                         <div class="detail-value">${algorithm["purpose"]}</div>
                     </div>` : ''}
 
-                    ${algorithm["算法困难问题类型"] ? `
+                    ${algorithm["problemType"] ? `
                     <div class="detail-item">
                         <div class="detail-label"><i class="fas fa-brain"></i>困难问题类型</div>
-                        <div class="detail-value">${algorithm["算法困难问题类型"]}</div>
+                        <div class="detail-value">${algorithm["problemType"]}</div>
                     </div>` : ''}
 
-                    ${algorithm["具体算法困难问题"] ? `
+                    ${algorithm["hardProblem"] ? `
                     <div class="detail-item">
                         <div class="detail-label"><i class="fas fa-cubes"></i>具体困难问题</div>
-                        <div class="detail-value">${algorithm["具体算法困难问题"]}</div>
+                        <div class="detail-value">${algorithm["hardProblem"]}</div>
                     </div>` : ''}
 
-                    ${algorithm["算法特色简介"] ? `
+                    ${algorithm["description"] ? `
                     <div class="detail-item">
                         <div class="detail-label"><i class="fas fa-info-circle"></i>算法特色简介</div>
-                        <div class="detail-value">${algorithm["算法特色简介"]}</div>
+                        <div class="detail-value">${algorithm["description"]}</div>
                     </div>` : ''}
 
-                    ${algorithm["算法后续进展"] ? `
+                    ${algorithm["progress"] ? `
                     <div class="detail-item">
                         <div class="detail-label"><i class="fas fa-forward"></i>算法后续进展</div>
-                        <div class="detail-value">${algorithm["算法后续进展"]}</div>
+                        <div class="detail-value">${algorithm["progress"]}</div>
                     </div>` : ''}
 
-                    ${algorithm["官网链接"] ? `
+                    ${algorithm["officialWebsite"] ? `
                     <div class="detail-item">
                         <div class="detail-label"><i class="fas fa-globe"></i>官网链接</div>
-                        <div class="detail-value"><a href="${algorithm["官网链接"]}" target="_blank">${algorithm["官网链接"]}</a></div>
+                        <div class="detail-value"><a href="${algorithm["officialWebsite"]}" target="_blank">${algorithm["官网链接"]}</a></div>
                     </div>` : ''}
 
-                    ${algorithm["源代码链接"] ? `
+                    ${algorithm["sourceCode"] ? `
                     <div class="detail-item">
                         <div class="detail-label"><i class="fas fa-code-branch"></i>源代码链接</div>
-                        <div class="detail-value"><a href="${algorithm["源代码链接"]}" target="_blank">${algorithm["源代码链接"]}</a></div>
+                        <div class="detail-value"><a href="${algorithm["sourceCode"]}" target="_blank">${algorithm["源代码链接"]}</a></div>
                     </div>` : ''}
 
-                    ${algorithm["文档链接"] ? `
+                    ${algorithm["documentation"] ? `
                     <div class="detail-item">
                         <div class="detail-label"><i class="fas fa-book"></i>文档链接</div>
-                        <div class="detail-value"><a href="${algorithm["文档链接"]}" target="_blank">${algorithm["文档链接"]}</a></div>
+                        <div class="detail-value"><a href="${algorithm["documentation"]}" target="_blank">${algorithm["文档链接"]}</a></div>
                     </div>` : ''}
 
-                    ${algorithm["标准化文件链接"] ? `
+                    ${algorithm["standardizationDocument"] ? `
                     <div class="detail-item">
                         <div class="detail-label"><i class="fas fa-file-alt"></i>标准化文件链接</div>
-                        <div class="detail-value"><a href="${algorithm["标准化文件链接"]}" target="_blank">${algorithm["标准化文件链接"]}</a></div>
+                        <div class="detail-value"><a href="${algorithm["standardizationDocument"]}" target="_blank">${algorithm["标准化文件链接"]}</a></div>
                     </div>` : ''}
 
                 </div>
