@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>国际标准 - 后量子密码</title>
+    <meta name="description" content="国际标准：后量子密码分析与制标工作">
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="static/css/all.min.css">
+    <style>
+        main {
+            padding: 4rem 1.5rem 2rem !important;
+            max-width: 1400px !important;
+        }
+
+        .cyber-card {
+            padding: 1.5rem !important;
+            margin: 1.5rem 0 !important;
+            max-width: 100% !important;
+        }
+
+        .cyber-card h2 {
+            font-size: 1.8rem !important;
+            margin-bottom: 1rem !important;
+        }
+
+
+        .nist-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .review-phase {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1.2rem;
+            box-shadow: var(--shadow);
+            min-height: 100%;
+        }
+
+        .review-phase-header {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .review-phase-header i {
+            color: var(--secondary-color);
+        }
+
+        /* 折叠条样式 */
+        .algorithm-accordion {
+            margin-bottom: 0.6rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .algorithm-accordion:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .algorithm-header {
+            background: #f8f9fa;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            user-select: none;
+        }
+
+        .algorithm-header:hover {
+            background: #e9ecef;
+        }
+
+        .algorithm-header.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .algorithm-name {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .algorithm-header.active .algorithm-name {
+            color: white;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            color: var(--secondary-color);
+        }
+
+        .algorithm-header.active .accordion-icon {
+            color: white;
+            transform: rotate(180deg);
+        }
+
+        .algorithm-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: white;
+        }
+
+        .algorithm-content.active {
+            max-height: 5000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .algorithm-details {
+            padding: 1rem;
+            line-height: 1.7;
+        }
+
+        .detail-item {
+            margin-bottom: 0.8rem;
+        }
+
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .detail-label i {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .detail-value {
+            color: #555;
+            font-size: 0.85rem;
+        }
+
+        .detail-value a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .detail-value a:hover {
+            text-decoration: underline;
+        }
+
+
+        .more-algorithms-accordion {
+            margin-top: 0.8rem;
+            border: 2px dashed var(--secondary-color);
+        }
+
+        .more-algorithms-accordion .algorithm-header {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(52, 152, 219, 0.05) 100%);
+            font-weight: 600;
+        }
+
+        .more-algorithms-accordion .algorithm-header:hover {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.15) 0%, rgba(52, 152, 219, 0.08) 100%);
+        }
+
+        .more-algorithms-accordion .algorithm-header.active {
+            background: var(--secondary-color);
+        }
+
+        .more-algorithms-accordion .algorithm-name {
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .more-algorithms-accordion .algorithm-header.active .algorithm-name {
+            color: white;
+        }
+
+        .more-algorithms-content {
+            background: #f8f9fa;
+            padding: 0.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .more-algorithms-content.active {
+            max-height: 100000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .more-algorithms-content .algorithm-accordion {
+            margin-bottom: 0.6rem;
+        }
+
+        .more-algorithms-content .algorithm-accordion:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .more-algorithms-content .algorithm-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: white;
+        }
+
+        .more-algorithms-content .algorithm-content.active {
+
+            max-height: none !important;
+            height: auto;
+            transition: max-height 0.5s ease-in;
+        }
+
+
+        .more-algorithms-content.active {
+            max-height: none !important;
+            height: auto;
+            transition: max-height 0.5s ease-in;
+        }
+
+
+        #selected-list .algorithm-accordion {
+            border: 2px solid #f39c12;
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.05) 0%, rgba(243, 156, 18, 0.02) 100%);
+        }
+
+        #selected-list .algorithm-header {
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.1) 0%, rgba(243, 156, 18, 0.05) 100%);
+        }
+
+        #selected-list .algorithm-header:hover {
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.15) 0%, rgba(243, 156, 18, 0.08) 100%);
+        }
+
+        #selected-list .algorithm-header.active {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+
+        #selected-list .algorithm-name {
+            color: #f39c12;
+            font-weight: 700;
+        }
+
+        #selected-list .algorithm-header.active .algorithm-name {
+            color: white;
+        }
+
+        #selected-list .accordion-icon {
+            color: #f39c12;
+        }
+
+        #selected-list .algorithm-header.active .accordion-icon {
+            color: white;
+        }
+
+
+        .eu-standard-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #e0e0e0;
+        }
+
+
+        @media (max-width: 1200px) {
+            .nist-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .review-phase {
+                padding: 1rem;
+            }
+
+            .algorithm-header {
+                padding: 0.8rem 1rem;
+            }
+
+            .algorithm-name {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-section" data-page="home" onclick="goToHome()">
+                <div class="logo-section" data-page="home" onclick="goToHome()">
+                    <img src="static/picture/logo.png" alt="Logo" class="logo-image">
+                    <span class="logo-text">后量子密码</span>
+                </div>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">首页</a></li>
+                <li><a href="international-standard.html" class="nav-link  active">国际标准</a></li>
+                <li><a href="domestic-standard.html" class="nav-link">国内标准</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- NIST标准部分 -->
+        <div class="cyber-card">
+            <h2><i class="fas fa-shield-alt"></i>NIST 后量子密码标准化</h2>
+
+            <p style="line-height: 1.8; color: var(--text-color); margin-bottom: 1.5rem; font-size: 0.95rem;">
+                NIST（美国国家标准与技术研究院）的后量子密码标准化项目旨在选择能够抵御量子计算机攻击的密码算法。
+                以下是各轮评审中落选或合并的算法，按评审阶段分类展示。
+            </p>
+
+            <div class="nist-container">
+                <!-- 第一轮部分落选/合并算法 -->
+                <div class="review-phase">
+                    <div class="review-phase-header">
+                        <i class="fas fa-list-ol"></i>
+                        第一轮部分落选/合并算法
+                    </div>
+                    <div class="algorithm-list" id="round1-list">
+
+                    </div>
+                </div>
+
+                <!-- 第二轮落选算法 -->
+                <div class="review-phase">
+                    <div class="review-phase-header">
+                        <i class="fas fa-list-ol"></i>
+                        第二轮落选算法
+                    </div>
+                    <div class="algorithm-list" id="round2-list">
+                    </div>
+                </div>
+
+                <!-- 第三轮落选算法 -->
+                <div class="review-phase">
+                    <div class="review-phase-header">
+                        <i class="fas fa-list-ol"></i>
+                        第三轮落选算法
+                    </div>
+                    <div class="algorithm-list" id="round3-list">
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- 首批入选算法 -->
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #e0e0e0;">
+                <div class="review-phase-header" style="margin-bottom: 1.5rem;">
+                    <i class="fas fa-star" style="color: #f39c12;"></i>
+                    首批入选算法
+                </div>
+                <div class="algorithm-list" id="selected-list">
+                </div>
+            </div>
+        </div>
+
+        <!-- 欧盟标准部分（占位） -->
+        <div class="cyber-card eu-standard-section">
+            <h2><i class="fas fa-flag-eu"></i>欧盟标准</h2>
+            <p style="line-height: 1.8; color: var(--text-color);">
+                欧盟后量子密码标准化内容正在完善中...
+            </p>
+        </div>
+    </main>
+
+    <script>
+
+        function toggleAlgorithm(header) {
+            const content = header.nextElementSibling;
+            const isActive = header.classList.contains('active');
+            const isInMoreAlgorithms = content.closest('.more-algorithms-content');
+
+
+            if (isActive) {
+                header.classList.remove('active');
+                if (isInMoreAlgorithms) {
+                    content.style.maxHeight = '0px';
+                    content.style.height = '0px';
+                } else {
+                    content.style.maxHeight = '0px';
+                }
+                updateParentContainerHeight(content);
+            } else {
+                header.classList.add('active');
+                if (isInMoreAlgorithms) {
+                    content.style.maxHeight = 'none';
+                    content.style.height = 'auto';
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+                updateParentContainerHeight(content);
+            }
+        }
+
+        function updateParentContainerHeight(childElement) {
+            const moreAlgorithmsContent = childElement.closest('.more-algorithms-content');
+            if (moreAlgorithmsContent && moreAlgorithmsContent.classList.contains('active')) {
+                setTimeout(() => {
+                    moreAlgorithmsContent.style.maxHeight = 'none';
+                    moreAlgorithmsContent.style.height = 'auto';
+                }, 10);
+            }
+        }
+
+        function setupMobileMenu() {
+            const menuToggle = document.getElementById('mobileMenuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            if (!menuToggle || !navLinks) {
+                return;
+            }
+
+            menuToggle.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const isActive = navLinks.classList.contains('active');
+
+                if (isActive) {
+                    navLinks.classList.remove('active');
+                } else {
+                    navLinks.classList.add('active');
+                }
+            });
+
+            navLinks.addEventListener('click', (e) => {
+                if (e.target.classList.contains('nav-link')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                    }
+                }
+            });
+        }
+
+        let scrollTimeout;
+        function setupSmartNavbar() {
+            const navbar = document.querySelector('.navbar');
+
+            window.addEventListener('scroll', () => {
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                }
+
+                const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (currentScrollTop <= 10) {
+                    navbar.classList.remove('hidden');
+                    navbar.classList.remove('scrolled');
+                } else {
+                    navbar.classList.add('hidden');
+                    if (currentScrollTop > 50) {
+                        navbar.classList.add('scrolled');
+                    }
+                }
+
+                scrollTimeout = setTimeout(() => {
+                }, 100);
+            }, { passive: true });
+        }
+
+        function createAlgorithmHTML(algorithm) {
+            return `
+        <div class="algorithm-accordion">
+            <div class="algorithm-header" onclick="toggleAlgorithm(this)">
+                <span class="algorithm-name">${algorithm["algorithmName"] || "未命名算法"}</span>
+                <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="algorithm-content">
+                <div class="algorithm-details">
+
+                    ${algorithm["purpose"] ? `
+                    <div class="detail-item">
+                        <div class="detail-label"><i class="fas fa-bullseye"></i>用途</div>
+                        <div class="detail-value">${algorithm["purpose"]}</div>
+                    </div>` : ''}
+
+                    ${algorithm["算法困难问题类型"] ? `
+                    <div class="detail-item">
+                        <div class="detail-label"><i class="fas fa-brain"></i>困难问题类型</div>
+                        <div class="detail-value">${algorithm["算法困难问题类型"]}</div>
+                    </div>` : ''}
+
+                    ${algorithm["具体算法困难问题"] ? `
+                    <div class="detail-item">
+                        <div class="detail-label"><i class="fas fa-cubes"></i>具体困难问题</div>
+                        <div class="detail-value">${algorithm["具体算法困难问题"]}</div>
+                    </div>` : ''}
+
+                    ${algorithm["算法特色简介"] ? `
+                    <div class="detail-item">
+                        <div class="detail-label"><i class="fas fa-info-circle"></i>算法特色简介</div>
+                        <div class="detail-value">${algorithm["算法特色简介"]}</div>
+                    </div>` : ''}
+
+                    ${algorithm["算法后续进展"] ? `
+                    <div class="detail-item">
+                        <div class="detail-label"><i class="fas fa-forward"></i>算法后续进展</div>
+                        <div class="detail-value">${algorithm["算法后续进展"]}</div>
+                    </div>` : ''}
+
+                    ${algorithm["官网链接"] ? `
+                    <div class="detail-item">
+                        <div class="detail-label"><i class="fas fa-globe"></i>官网链接</div>
+                        <div class="detail-value"><a href="${algorithm["官网链接"]}" target="_blank">${algorithm["官网链接"]}</a></div>
+                    </div>` : ''}
+
+                    ${algorithm["源代码链接"] ? `
+                    <div class="detail-item">
+                        <div class="detail-label"><i class="fas fa-code-branch"></i>源代码链接</div>
+                        <div class="detail-value"><a href="${algorithm["源代码链接"]}" target="_blank">${algorithm["源代码链接"]}</a></div>
+                    </div>` : ''}
+
+                    ${algorithm["文档链接"] ? `
+                    <div class="detail-item">
+                        <div class="detail-label"><i class="fas fa-book"></i>文档链接</div>
+                        <div class="detail-value"><a href="${algorithm["文档链接"]}" target="_blank">${algorithm["文档链接"]}</a></div>
+                    </div>` : ''}
+
+                    ${algorithm["标准化文件链接"] ? `
+                    <div class="detail-item">
+                        <div class="detail-label"><i class="fas fa-file-alt"></i>标准化文件链接</div>
+                        <div class="detail-value"><a href="${algorithm["标准化文件链接"]}" target="_blank">${algorithm["标准化文件链接"]}</a></div>
+                    </div>` : ''}
+
+                </div>
+            </div>
+        </div>
+    `;
+        }
+
+
+        function renderAlgorithms(algorithms, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const MAX_VISIBLE = 5; // 默认显示的最大数量
+            const visibleAlgorithms = algorithms.slice(0, MAX_VISIBLE);
+            const hiddenAlgorithms = algorithms.slice(MAX_VISIBLE);
+
+            let html = visibleAlgorithms.map(algorithm =>
+                createAlgorithmHTML(algorithm)
+            ).join('');
+
+            if (hiddenAlgorithms.length > 0) {
+                const moreAlgorithmsHTML = hiddenAlgorithms.map(algorithm =>
+                    createAlgorithmHTML(algorithm)
+                ).join('');
+
+                html += `
+                    <div class="algorithm-accordion more-algorithms-accordion">
+                        <div class="algorithm-header" onclick="toggleMoreAlgorithms(this, '${containerId}')">
+                            <span class="algorithm-name">
+                                <i class="fas fa-chevron-down accordion-icon" style="margin-right: 0.5rem; transform: rotate(0deg);"></i>
+                                更多算法 (${hiddenAlgorithms.length}条)
+                            </span>
+                            <i class="fas fa-chevron-down accordion-icon more-algorithms-icon"></i>
+                        </div>
+                        <div class="algorithm-content more-algorithms-content">
+                            ${moreAlgorithmsHTML}
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function toggleMoreAlgorithms(header, containerId) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.more-algorithms-icon');
+            const isActive = header.classList.contains('active');
+
+            if (isActive) {
+                header.classList.remove('active');
+                content.classList.remove('active');
+                content.style.maxHeight = '0px';
+                content.style.height = '0px';
+                if (icon) {
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            } else {
+                header.classList.add('active');
+                content.classList.add('active');
+                content.style.maxHeight = 'none';
+                content.style.height = 'auto';
+                if (icon) {
+                    icon.style.transform = 'rotate(180deg)';
+                }
+
+                setTimeout(() => {
+                    const nestedContents = content.querySelectorAll('.algorithm-content.active');
+                    nestedContents.forEach(nestedContent => {
+                        nestedContent.style.maxHeight = 'none';
+                        nestedContent.style.height = 'auto';
+                    });
+                }, 10);
+            }
+        }
+
+        async function loadAlgorithms() {
+            const basePath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+
+            const possiblePaths = [
+                basePath + 'static/data/algorithms.json',
+                'static/data/algorithms.json',
+                './static/data/algorithms.json',
+                '/static/data/algorithms.json'
+            ];
+
+            let data = null;
+            let lastError = null;
+
+            for (const path of possiblePaths) {
+                try {
+                    const response = await fetch(path);
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    data = await response.json();
+                    lastError = null;
+                    break;
+                } catch (error) {
+                    lastError = error;
+                    console.warn(`尝试路径 ${path} 失败:`, error);
+                    continue;
+                }
+            }
+
+            if (data && !lastError) {
+                if (data.round1 && Array.isArray(data.round1)) {
+                    renderAlgorithms(data.round1, 'round1-list');
+                }
+                if (data.round2 && Array.isArray(data.round2)) {
+                    renderAlgorithms(data.round2, 'round2-list');
+                }
+                if (data.round3 && Array.isArray(data.round3)) {
+                    renderAlgorithms(data.round3, 'round3-list');
+                }
+                if (data.selected && Array.isArray(data.selected)) {
+                    const container = document.getElementById('selected-list');
+                    if (container) {
+                        container.innerHTML = data.selected.map(algorithm =>
+                            createAlgorithmHTML(algorithm)
+                        ).join('');
+                    }
+                }
+            } else {
+                console.error('所有路径都加载失败，最后错误:', lastError);
+                const containers = ['round1-list', 'round2-list', 'round3-list', 'selected-list'];
+                containers.forEach(id => {
+                    const container = document.getElementById(id);
+                    if (container) {
+                        container.innerHTML = `
+                            <p style="color: #e74c3c; text-align: center; padding: 2rem;">
+                                <i class="fas fa-exclamation-triangle"></i><br>
+                                算法数据加载失败<br>
+                                <small style="color: #999;">错误: ${lastError ? lastError.message : '未知错误'}<br>
+                                请检查 static/data/algorithms.json 文件是否存在</small>
+                            </p>
+                        `;
+                    }
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupMobileMenu();
+            setupSmartNavbar();
+            loadAlgorithms();
+        });
+    </script>
+</body>
+
+</html>

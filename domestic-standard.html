@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>国内标准 - 后量子密码</title>
+    <meta name="description" content="国内标准：后量子密码分析与制标工作">
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="static/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-section" data-page="home" onclick="goToHome()">
+                <div class="logo-section" data-page="home" onclick="goToHome()">
+                    <img src="static/picture/logo.png" alt="Logo" class="logo-image">
+                    <span class="logo-text">后量子密码</span>
+                </div>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">首页</a></li>
+                <li><a href="international-standard.html" class="nav-link">国际标准</a></li>
+                <li><a href="domestic-standard.html" class="nav-link  active" >国内标准</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <div class="cyber-card" style="margin-top: 4rem;">
+            <h2><i class="fas fa-flag"></i>国内标准</h2>
+            
+            <section style="margin: 2rem 0;">
+                <h3 style="color: var(--primary-color); margin-bottom: 1.5rem;">
+                    <i class="fas fa-book"></i> 标准介绍
+                </h3>
+                <p style="line-height: 1.8; color: var(--text-color); margin-bottom: 1.5rem;">
+                    国内标准页面致力于展示符合中国国家标准和行业规范的后量子密码技术标准、评估方法和实施指南。
+                </p>
+                
+                <div style="background: rgba(52, 152, 219, 0.05); padding: 2rem; border-radius: var(--border-radius); margin: 2rem 0;">
+                    <h4 style="color: var(--secondary-color); margin-bottom: 1rem;">
+                        <i class="fas fa-list"></i> 主要内容
+                    </h4>
+                    <ul style="line-height: 2; padding-left: 2rem;">
+                        <li>国家标准（GB）相关规范</li>
+                        <li>行业标准与最佳实践</li>
+                        <li>国内密码算法评估标准</li>
+                        <li>合规性要求和认证流程</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section style="margin: 2rem 0;">
+                <h3 style="color: var(--primary-color); margin-bottom: 1.5rem;">
+                    <i class="fas fa-info-circle"></i> 更多信息
+                </h3>
+                <p style="line-height: 1.8; color: var(--text-color);">
+                    本页面将持续更新国内后量子密码标准的最新动态和详细内容。
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // 移动端菜单控制
+        function setupMobileMenu() {
+            const menuToggle = document.getElementById('mobileMenuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            if (!menuToggle || !navLinks) {
+                return;
+            }
+
+            menuToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const isActive = navLinks.classList.contains('active');
+                
+                if (isActive) {
+                    navLinks.classList.remove('active');
+                } else {
+                    navLinks.classList.add('active');
+                }
+            });
+
+            navLinks.addEventListener('click', (e) => {
+                if (e.target.classList.contains('nav-link')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                    }
+                }
+            });
+        }
+
+        // 导航栏滚动隐藏控制
+        let scrollTimeout;
+        function setupSmartNavbar() {
+            const navbar = document.querySelector('.navbar');
+
+            window.addEventListener('scroll', () => {
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                }
+
+                const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (currentScrollTop <= 10) {
+                    navbar.classList.remove('hidden');
+                    navbar.classList.remove('scrolled');
+                } else {
+                    navbar.classList.add('hidden');
+                    if (currentScrollTop > 50) {
+                        navbar.classList.add('scrolled');
+                    }
+                }
+
+                scrollTimeout = setTimeout(() => {
+                    // 滚动结束逻辑
+                }, 100);
+            }, { passive: true });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupMobileMenu();
+            setupSmartNavbar();
+        });
+    </script>
+</body>
+</html>

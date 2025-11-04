@@ -1,0 +1,422 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Post-Quantum密码平台</title>
+    <meta name="description" content="后量子密码学">
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="static/css/all.min.css">
+    <style>
+        .new-evaluation-table-container {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+        }
+
+        .new-evaluation-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 1400px;
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        .new-evaluation-table th {
+            background: var(--card-bg);
+            color: var(--primary-color);
+            font-weight: 700;
+            text-align: center;
+            padding: 1rem 0.8rem;
+            border: 1px solid #eee;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .new-evaluation-table th.model-header {
+            background: var(--card-bg);
+            width: 120px;
+            text-align: left;
+            padding-left: 1rem;
+        }
+
+        .new-evaluation-table td {
+            padding: 1rem 0.8rem;
+            border: 1px solid #eee;
+            text-align: center;
+            font-weight: 600;
+            background: var(--card-bg);
+            transition: background-color 0.3s ease;
+        }
+
+        .new-evaluation-table td.model-name {
+            text-align: left;
+            background: var(--card-bg);
+            color: var(--primary-color);
+            font-weight: 700;
+            padding-left: 1rem;
+        }
+
+        .new-evaluation-table tr:hover td {
+            background: rgba(52, 152, 219, 0.05);
+        }
+
+        .best-score-cell {
+            color: #e74c3c !important;
+            font-weight: 700;
+        }
+
+        .normal-score {
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            .video-preview {
+                width: 100% !important;
+                height: 100% !important;
+                position: relative !important;
+                display: block !important;
+            }
+            
+            .video-container {
+                height: 280px !important;
+                position: relative !important;
+                overflow: hidden !important;
+            }
+            
+            .video-cover-image {
+                width: 100% !important;
+                height: 80% !important;  
+                object-fit: cover !important;
+                object-position: center 40% !important;  
+                position: absolute !important;
+                top: -15% !important;  
+            }
+            
+            .video-overlay {
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                background: rgba(0, 0, 0, 0.4) !important;
+                z-index: 10 !important;
+            }
+            
+            .play-button {
+                position: relative !important;
+                top: -20% !important;
+                left: auto !important;
+                transform: none !important;
+                margin: 0 !important;
+                width: 80px !important;
+                height: 80px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+                background: rgba(255, 255, 255, 0.25) !important;
+                border: 2px solid #3498db !important;
+                border-radius: 50% !important;
+                color: #3498db !important;
+                cursor: pointer !important;
+                backdrop-filter: blur(10px) !important;
+            }
+            
+            .play-button i {
+                font-size: 1.1rem !important;
+                margin: 0 !important;
+            }
+            
+            .play-button span {
+                font-size: 0.65rem !important;
+                margin-top: 2px !important;
+                line-height: 1 !important;
+            }
+
+            .new-evaluation-table-container {
+                margin: 1rem -1rem;
+                border-radius: 0;
+            }
+            
+            .new-evaluation-table {
+                font-size: 0.75rem;
+                min-width: 1200px;
+            }
+            
+            .new-evaluation-table th,
+            .new-evaluation-table td {
+                padding: 0.6rem 0.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-section" data-page="home" onclick="goToHome()">
+                <div class="logo-section" data-page="home" onclick="goToHome()">
+                    <img src="static/picture/logo.png" alt="Logo" class="logo-image">
+                    <span class="logo-text">后量子密码</span>
+                </div>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link active">首页</a></li>
+                <li><a href="international-standard.html" class="nav-link">国际标准</a></li>
+                <li><a href="domestic-standard.html" class="nav-link" >国内标准</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- 首页 -->
+        <div id="home" class="content-page active">
+            <section class="hero">
+                <div class="hero-icon">
+                    <img src="static/picture/logo.png" alt="玄知大模型 Logo" class="hero-logo">
+                </div>
+                <h1>后量子密码分析及制标工作</h1>
+                <div class="hero-subtitle">标准介绍平台</div>
+                <p class="hero-description">
+                    致力于重塑乃传统密码算法与密码协议的分析设计模式，革新密码工程的实现方式
+                </p>
+                
+                <div class="button-group">
+                    <a href="international-standard.html" class="cyber-button">
+                        <i class="fas fa-earth-americas"></i>
+                        国际标准
+                    </a>
+                    <a href="domestic-standard.html" class="cyber-button">
+                        <i class="fas fa-certificate"></i>
+                        国内标准
+                    </a>
+                </div>
+            </section>
+        </div>
+
+
+
+        
+
+    </main>
+
+    <script>
+
+        // 导航栏滚动隐藏控制
+        let scrollTimeout;
+
+        function setupSmartNavbar() {
+            const navbar = document.querySelector('.navbar');
+
+            window.addEventListener('scroll', () => {
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                }
+
+                const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (currentScrollTop <= 10) {
+                    navbar.classList.remove('hidden');
+                    navbar.classList.remove('scrolled');
+                } else {
+                    navbar.classList.add('hidden');
+                    if (currentScrollTop > 50) {
+                        navbar.classList.add('scrolled');
+                    }
+                }
+
+                scrollTimeout = setTimeout(() => {
+                    // 滚动结束逻辑
+                }, 100);
+            }, { passive: true });
+        }
+
+        // Logo点击跳转首页
+        function goToHome() {
+            showPage('home');
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 显示Coming Soon模态框
+        function showComingSoon(event) {
+            event.preventDefault();
+            
+            const modal = document.createElement('div');
+            modal.className = 'coming-soon-modal';
+            modal.innerHTML = `
+                <div class="coming-soon-content">
+                    <div class="coming-soon-icon">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                    <h3>Coming Soon</h3>
+                    <p>论文正在整理中，敬请期待！</p>
+                    <p>Paper is being prepared, stay tuned!</p>
+                    <button class="close-modal" onclick="closeComingSoon()">
+                        <i class="fas fa-times"></i>
+                        关闭
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            setTimeout(() => modal.classList.add('show'), 10);
+        }
+
+        function closeComingSoon() {
+            const modal = document.querySelector('.coming-soon-modal');
+            if (modal) {
+                modal.classList.remove('show');
+                setTimeout(() => modal.remove(), 300);
+            }
+        }
+
+        // 页面导航系统
+        function setupNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentPages = document.querySelectorAll('.content-page');
+            const buttons = document.querySelectorAll('[data-page]');
+
+            function showPage(pageId) {
+                contentPages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                }
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                const activeLink = document.querySelector(`[data-page="${pageId}"]`);
+                if (activeLink && activeLink.classList.contains('nav-link')) {
+                    activeLink.classList.add('active');
+                }
+            }
+
+            buttons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = button.getAttribute('data-page');
+                    showPage(pageId);
+                });
+            });
+
+            window.showPage = showPage;
+        }
+
+        // 移动端菜单控制
+        function setupMobileMenu() {
+            const menuToggle = document.getElementById('mobileMenuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            if (!menuToggle || !navLinks) {
+                return;
+            }
+
+            const newMenuToggle = menuToggle.cloneNode(true);
+            menuToggle.parentNode.replaceChild(newMenuToggle, menuToggle);
+
+            const freshMenuToggle = document.getElementById('mobileMenuToggle');
+            
+            ['click', 'touchend'].forEach(eventType => {
+                freshMenuToggle.addEventListener(eventType, function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const isActive = navLinks.classList.contains('active');
+                    
+                    if (isActive) {
+                        navLinks.classList.remove('active');
+                    } else {
+                        navLinks.classList.add('active');
+                    }
+                }, { passive: false });
+            });
+
+            navLinks.addEventListener('click', (e) => {
+                if (e.target.classList.contains('nav-link')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!freshMenuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                    }
+                }
+            });
+        }
+
+        // 视频播放功能
+        function playVideo() {
+            const videoFrame = document.getElementById('videoFrame');
+            const videoPlayer = document.getElementById('videoPlayer');
+            
+            videoFrame.classList.remove('hidden');
+            videoPlayer.play();
+        }
+
+        function closeVideo() {
+            const videoFrame = document.getElementById('videoFrame');
+            const videoPlayer = document.getElementById('videoPlayer');
+            
+            videoFrame.classList.add('hidden');
+            videoPlayer.pause();
+            videoPlayer.currentTime = 0;
+        }
+
+        // 初始化所有功能
+        document.addEventListener('DOMContentLoaded', () => {
+            setupNavigation();
+            setupMobileMenu();
+            setupSmartNavbar();
+            generateTableData();
+        });
+
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.cyber-card, .feature-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+	<div style="display:none;"><a data-href="https://smalltool.github.io/">整站下载器</a></div>
+</body>
+</html>
