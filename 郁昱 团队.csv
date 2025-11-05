@@ -1,0 +1,42 @@
+算法名,算法用途,算法困难问题类型,具体算法困难问题,作者团队,官网链接,源代码链接,标准化文件链接,所有评论,算法特色简介,算法后续进展
+Lepton,密钥封装,格,Ring-Compact Learning Parity with Noise (Ring-LPN) problem,郁昱 团队,,https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/submissions/Lepton.zip,https://github.com/sageblue000/pqc_collect/blob/master/Supporting_Documentation/NIST_round1/Lepton/Lepton.pdf,https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/Lepton-official-comment.pdf,Lepton 是一种基于“紧凑版学习奇偶噪声”(CLPN) 及其环变体（Ring-CLPN）的后量子密钥封装（KEM）方案，安全性依赖（Ring-）CLPN 的难解性；工程上以比特级 XOR/AND 为主、实现简单并较传统低噪声 LPN 方案显著压缩公钥/密文，但总体效率与带宽仍不及主流 Module-LWE 系列（如 Kyber）。,在 NIST 第一轮中未能胜出，无缘NIST标准化。
+aigis-kem,密钥封装,格,Asymmetric Module-LWE problem,郁昱 团队,https://github.com/pqcrypto-cn/PQMagic,https://github.com/pqcrypto-cn/PQMagic/tree/main/kem/aigis-enc/std,https://github.com/sageblue000/pqc_collect/blob/master/Supporting_Documentation/pqmagic/aigis/2019-510.pdf,https://sfjs.cacrnet.org.cn/site/content/407.html,Aigis-Enc 是一种基于 Asymmetric Module-LWE (AMLWE) 假设的格基后量子 KEM，通过利用非对称参数化在保持相同安全级别下显著缩减公钥和密文长度（比 Kyber 小约 15–20%），在通信效率与安全裕度间取得更优平衡。,在全国密码算法设计竞赛获得一等奖。
+aigis-sig,签名,格,Asymmetric Module-LWE problem and Asymmetric Module-SIS problem,郁昱 团队,https://github.com/pqcrypto-cn/PQMagic,https://github.com/pqcrypto-cn/PQMagic/tree/main/sig/aigis-sig/std,https://github.com/sageblue000/pqc_collect/blob/master/Supporting_Documentation/pqmagic/aigis/2019-510.pdf,https://sfjs.cacrnet.org.cn/site/content/417.html,Aigis-Sig 是基于 Asymmetric Module-LWE (AMLWE) 与 Asymmetric Module-SIS (AMSIS) 假设的格基数字签名方案，通过利用非对称参数化在保持相同安全级别下显著缩减公钥和密文长度，相比 Dilithium 在相同安全级下公钥与签名更短（约减少 160/256 B），同时保持相近的速度与更好的存储效率。,在全国密码算法设计竞赛获得一等奖。
+SPHINCS-alpha,签名,哈希,Pseudorandomness Assumption for Hash Function,郁昱 团队,https://github.com/pqcrypto-cn/PQMagic,https://github.com/pqcrypto-cn/PQMagic/tree/main/sig/sphincs-a/std,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-1/spec-files/sphincs-alpha-spec-web.pdf,,SPHINCS-α 是一种基于哈希的无状态后量子签名方案，安全性仅依赖底层哈希函数（抗碰撞与单向性），在 SPHINCS+ 基础上通过更高效的 FORS 与 HORST 设计显著减少签名大小和验证成本；相比格基签名（如 Dilithium、Falcon），其安全假设更简单、抗侧信道性更强，但签名仍较大、速度略慢。,在 NIST 额外第一轮中未能胜出，无缘NIST标准化。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

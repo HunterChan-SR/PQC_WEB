@@ -1,0 +1,41 @@
+[
+    {
+        "algorithmName": "LAC",
+        "purpose": "密钥封装",
+        "hardProblemType": "格",
+        "hardProblem": "Ring Learning with Errors (Ring-LWE) problem",
+        "author": "路献辉 团队",
+        "officialSite": "",
+        "sourceCode": "https://github.com/sageblue000/pqc_collect/tree/master/implementation/LAC",
+        "standardDoc": "https://github.com/sageblue000/pqc_collect/blob/master/Supporting_Documentation/NIST_round2/LAC/LAC.pdf",
+        "allComments": "https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/LAC-official-comment.pdf\r\n\r\nhttps://csrc.nist.gov/CSRC/media/Projects/post-quantum-cryptography/documents/round-2/official-comments/LAC-round2-official-comment.pdf",
+        "description": "LAC 是基于 Ring-LWE 的格基密钥封装（KEM）方案，安全性来自（环）学习误差问题；通过采用字节级模数 q=251、固定汉明重误差分布与 BCH 纠错以压缩公钥/密文并简化实现，但因不使用 NTT、主要依赖 AVX2 向量化，计算性能通常不及 NTT 型方案（如 Kyber），且需应对极小概率的解密错误。",
+        "progress": "在 NIST 第二轮中未能胜出，无缘NIST标准化。"
+    },
+    {
+        "algorithmName": "SIAKE",
+        "purpose": "密钥封装",
+        "hardProblemType": "同源",
+        "hardProblem": "Supersingular Isogeny Diffie–Hellman (SIDH) problem",
+        "author": "路献辉 团队",
+        "officialSite": "",
+        "sourceCode": "https://cmsfiles.zhongkefu.com.cn/cmsmimasfjs/frontend_upload/5db41f0fc38b6.rar",
+        "standardDoc": "https://github.com/sageblue000/pqc_collect/blob/master/Supporting_Documentation/others/SIAKE/SIAKE.pdf",
+        "allComments": "https://sfjs.cacrnet.org.cn/site/content/412.html",
+        "description": "SIAKE 是一种基于超奇异同源（SIDH）的认证密钥交换：通过“2-Key PKE”封装并在 CK+ 模型下证明，将会话机密性与 KCI/MEX/wPFS 等性质归约到（one-time/1-oracle）Hashed-SIDH 与相应 IND-CPA 假设；性能上采用 SIKE 的 p503/p751 等参数，通信更紧凑但计算开销偏大，相较格基或传统椭圆曲线 AKE 一般更慢但更省带宽。",
+        "progress": "在全国密码算法设计竞赛获得二等奖。"
+    },
+    {
+        "algorithmName": "DAWN",
+        "purpose": "密钥封装",
+        "hardProblemType": "格",
+        "hardProblem": "Number Theory Research Unit (NTRU) problem",
+        "author": "路献辉 团队",
+        "officialSite": "",
+        "sourceCode": "",
+        "standardDoc": "https://eprint.iacr.org/2025/1520.pdf",
+        "allComments": "",
+        "description": "DAWN 是一种基于 NTRU 的格基密钥封装（KEM）方案，提出“零因子编码 + 双重编码”范式，在 2 的幂次旋转环上以 NTRU 假设与 Ring-LWE 假设为安全基础，无需额外假设；在相当安全级下较 NEV/BAT/Kyber 进一步压缩密文与通信开销并整体更快，同时保持极低解密失败率。",
+        "progress": "暂未参与任何国内外标准化竞赛。"
+    }
+]

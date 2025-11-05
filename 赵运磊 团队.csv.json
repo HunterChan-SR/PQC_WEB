@@ -1,0 +1,41 @@
+[
+    {
+        "algorithmName": "KCL",
+        "purpose": "密钥封装",
+        "hardProblemType": "格",
+        "hardProblem": "LWE/LWR/RLWE/MLWE",
+        "author": "赵运磊 团队",
+        "officialSite": "",
+        "sourceCode": "https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/submissions/OKCN_AKCN_CNKE.zip",
+        "standardDoc": "https://github.com/sageblue000/pqc_collect/blob/master/Supporting_Documentation/NIST_round1/OKCN_AKCN_CNKE/Specifications-OKCN_AKCN_CNKE.pdf",
+        "allComments": "https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/round-1/official-comments/KCL-okcn-official-comment.pdf",
+        "description": "KCL（OKCN/AKCN/CNKE）是一套以“带噪一致性”机制模块化构建 LWE/LWR/RLWE/MLWE 系列的 KEM、PKE 与 AKE 的格基方案族，其安全性分别基于相应的（R/ML）LWE/LWR 决定性假设并可借 FO 变换达到 IND-CCA2；在性能上通过多比特一致性与误差校正（如 SEC/E8）显著降低带宽与错误率、在多种实例中优于 Frodo/NewHope，MLWE 实例的通信开销也可优于 Kyber，同时保持实现简洁与参数可调。",
+        "progress": "在 NIST 第一轮中未能胜出，无缘NIST标准化。"
+    },
+    {
+        "algorithmName": "木兰",
+        "purpose": "签名",
+        "hardProblemType": "格",
+        "hardProblem": "Module Learning With Errors (MLWE) problem and Module Short Integer Solution (MSIS) problem",
+        "author": "赵运磊 团队",
+        "officialSite": "",
+        "sourceCode": "https://cmsfiles.zhongkefu.com.cn/cmsmimasfjs/frontend_upload/5db9708197077.zip",
+        "standardDoc": "https://github.com/sageblue000/pqc_collect/blob/master/Supporting_Documentation/others/%E6%9C%A8%E5%85%B0/%E7%AE%97%E6%B3%95%E6%96%87%E6%9C%AC-%E6%9C%A8%E5%85%B0%EF%BC%9A%E9%AB%98%E6%95%88%E3%80%81%E7%81%B5%E6%B4%BB%E3%80%81%E5%AE%89%E5%85%A8%E5%A2%9E%E5%BC%BA%E7%9A%84%E6%A0%BC%E5%9F%BA%E7%AD%BE%E5%90%8D.pdf",
+        "allComments": "https://sfjs.cacrnet.org.cn/site/content/431.html",
+        "description": "木兰（Mulan）是一种基于模格（Module-LWE / Module-SIS）困难问题的高效、模块化格基数字签名方案，通过引入确定性带噪声密钥共识机制（RKCN）统一签名与密钥交换模块，在QROM模型下可紧规约安全；相比 Dilithium，木兰在公钥/签名更短（约13%减小）、签名速度提升约19%，且具备更强参数灵活性与硬件适配性",
+        "progress": "在全国密码算法设计竞赛获得三等奖。"
+    },
+    {
+        "algorithmName": "CTRU",
+        "purpose": "密钥封装",
+        "hardProblemType": "格",
+        "hardProblem": "Approximate Shortest Vector Problem (approx-SVP) and Ring Learning with Errors (Ring-LWE) problem",
+        "author": "赵运磊 团队",
+        "officialSite": "",
+        "sourceCode": "",
+        "standardDoc": "https://arxiv.org/pdf/2205.05413",
+        "allComments": "",
+        "description": "CTRU 是一种基于经典 NTRU 结构但使用复合环（Composed Ring）和多项式卷积优化的格基加密/签名方案，通过引入复合模数与中心化取样减少解码错误率；其安全性基于近似最短向量问题（approx-SVP）与Learning With Errors (LWE) / Ring-LWE 的难解性；在性能上相较传统 NTRU 提供更高安全裕度与更快密钥生成与加解密速度，在保持短密钥的同时提升抗量子攻击能力。",
+        "progress": "暂未参与任何国内外标准化竞赛。"
+    }
+]

@@ -3,7 +3,7 @@ CROSS,签名,编码,Restricted Syndrome Decoding (RSD) Problem,Marco Baldi 等,h
 LESS,签名,编码,Canonical Forms Linear Equivalence Problem (CF-LEP),Marco Baldi 等,https://www.less-project.com/,https://github.com/less-sig/LESS,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-2/spec-files/less-spec-round2-web.pdf,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-1/official-comments/LESS-sign-round1-dig-sig-official-comment.pdf,LESS 是一种基于线性等价问题（LEP）的代码类签名方案，通过对“线性码等价性的零知识 Sigma 协议”施加 Fiat–Shamir 变换获得 EUF-CMA 安全；相较格基/哈希型方案，它以极小公钥、实现简洁和较短签名为特色（通过规范形与固定权挑战压缩），但签名仍偏大于主流格基签名、底层假设相对更新。,正在接受 NIST 额外第二轮的评估。
 SQIsign,签名,同源,Endomorphism Ring Problem,Marius A. Aardal 等,https://sqisign.org/,https://github.com/SQIsign/the-sqisign,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-2/spec-files/sqisign-spec-round2-web.pdf,,SQIsign 是一种同源基（isogeny-based）后量子签名，安全性基于超奇异椭圆曲线自同态环求解（endomorphism ring problem）难解性并给出 EUF-CMA 证明；相较格基方案（如 ML-DSA/Dilithium、Falcon），其公钥与签名极为紧凑（组合体积业内最小之一），验证较快而签名偏慢、实现更复杂但已具实用效率。,正在接受 NIST 额外第二轮的评估。
 HAWK,签名,格,Lattice Isomorphism Problem (LIP),Joppe W. Bos 等,https://hawk-sign.info/,https://github.com/hawk-sign/dev/,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-2/spec-files/hawk-spec-round2-web.pdf,,HAWK 是一种格基签名方案，源自 LIP 并在 qROM 下把 SUF-CMA 安全性归约到 omSVP、密钥恢复归约到 smLIP；工程上具备小密钥/签名、签验快速、占用内存低且无需浮点，相比 Dilithium/Falcon 更紧凑但安全假设较新、离散高斯采样的侧信道防护仍待加强。,正在接受 NIST 额外第二轮的评估。
-Mirath,签名,MPCitH,Minimum Rank (MinRank)Problem,Gor Adj 等,https://pqc-mirath.org/,https://pqc-mirath.org/assets/downloads/mirath_v2.1.0.zip,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-2/spec-files/mirath-spec-round2-web.pdf,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-1/official-comments/MiRitH-round1-dig-sig-official-comment.pdf,Mirath 是一种基于 MinRank 困难性的后量子签名，采用 TCitH（可选 VOLEitH）范式的“in-the-Head”零知识证明并经 Fiat–Shamir 去交互化；相较同类 MinRank 方案（如 MIRA/MiRitH），通过 Dual-Support 建模与批量 all-but-one 向量承诺等优化显著缩小签名并保持可实现的验证效率，但以更高的证明/哈希开销为代价。,正在接受 NIST 额外第二轮的评估。
+Mirath,签名,MPCitH,Minimum Rank (MinRank) Problem,Gor Adj 等,https://pqc-mirath.org/,https://pqc-mirath.org/assets/downloads/mirath_v2.1.0.zip,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-2/spec-files/mirath-spec-round2-web.pdf,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-1/official-comments/MiRitH-round1-dig-sig-official-comment.pdf,Mirath 是一种基于 MinRank 困难性的后量子签名，采用 TCitH（可选 VOLEitH）范式的“in-the-Head”零知识证明并经 Fiat–Shamir 去交互化；相较同类 MinRank 方案（如 MIRA/MiRitH），通过 Dual-Support 建模与批量 all-but-one 向量承诺等优化显著缩小签名并保持可实现的验证效率，但以更高的证明/哈希开销为代价。,正在接受 NIST 额外第二轮的评估。
 MQOM,签名,MPCitH,Unstructured Multivariate Quadratic (MQ) problem,Ryad Benadjila 等,https://mqom.org/,https://github.com/mqom,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-2/spec-files/mqom-spec-round2-web.pdf,,MQOM 是一种基于多变量二次方程（MQ）难题、采用 TCitH/“in-the-Head” 证明并经 Fiat–Shamir 去交互化的后量子签名；其安全性依赖随机 MQ 的难解性与基于哈希/XOF 的承诺绑定性，性能上通过阈值秘密共享、字段嵌入与批处理把签名显著做小（v2 在 I 级约 2.8–4.2KB）并提升验证效率，但总体仍较主流格基签名体积更大、计算更重。,正在接受 NIST 额外第二轮的评估。
 PERK,签名,MPCitH,Relaxed Inhomogeneous Permuted Kernel Problem (r-IPKP),Najwa Aaraj 等,https://pqc-perk.org/,https://pqc-perk.org/assets/downloads/perk-v2.1.0.zip,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-2/spec-files/perk-spec-round2-web.pdf,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-1/official-comments/PERK-round1-dig-sig-official-comment.pdf,PERK 是一种基于置换核问题变体 r-IPKP、采用 MPC-in-the-Head 证明并通过 Fiat–Shamir 去交互化的代码类签名；其安全性在随机预言机模型下依赖 r-IPKP 的困难性与哈希/承诺安全，工程上具备极小公钥与简洁（常数时间）实现，但签名相对较大、以哈希为主的计算开销更高，整体较格基签名（如 Dilithium/Falcon）通信更重而实现更轻。,正在接受 NIST 额外第二轮的评估。
 RYDE,签名,MPCitH,Rank Syndrome Decoding (RSD) problem,Nicolas Aragon 等,https://pqc-ryde.org/,https://pqc-ryde.org/assets/downloads/ryde_v2.1.0.zip,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-2/spec-files/ryde-spec-round2-web.pdf,,"RYDE 是一种基于秩综合译码（Rank Syndrome Decoding, RSD）问题的代码类后量子签名方案，安全性建立在 RSD/RSDs 困难性与 Fiat–Shamir 转换下的零知识证明；采用 TCitH（或 VOLEitH）框架与 Dual-Support 建模显著缩小签名体积（约 4–6KB），在代码类签名中兼顾较小密钥、可并行实现与较快验证性能。",正在接受 NIST 额外第二轮的评估。
@@ -11,5 +11,60 @@ SDitH,签名,MPCitH,Syndrome Decoding (SD) problem for Random Linear Codes on a 
 MAYO,签名,多变量,Oil-and-Vinegar Indistinguishability (OV-IND) Problem,Ward Beullens 等,https://pqmayo.org/,https://github.com/open-quantum-safe/liboqs/tree/main/src/sig/mayo,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-2/spec-files/mayo-spec-round2-web.pdf,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-1/official-comments/MAYO-round1-dig-sig-official-comment.pdf,MAYO 是一种基于多变量二次（MQ）陷门的签名方案，是 Oil-and-Vinegar（OV）结构的改进型。它通过引入“k-fold whipping”机制在有限域 GF(16) 上实现更高密度的方程构造，从而在保持安全性的同时显著缩小公钥体积。其安全性依赖于从公开映射恢复油空间或陷门的困难（即 OV 不可区分性问题），对抗最新的系统求解与 MinRank 攻击。相比传统格基和哈希基签名，MAYO 具有更小的公钥和更快的验证性能；相比经典 OV，它在略增签名长度的代价下换来了公钥体积的大幅降低。,正在接受 NIST 额外第二轮的评估。
 QR-UOV,签名,多变量,Unbalanced Oil-and-Vinegar (UOV) problem and Quotient-Ring Multivariate Quadratic (QR-MQ) problem,Rika Akiyama 等,http://info.isl.ntt.co.jp/crypt/qruov/,https://github.com/qruov/qruov,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/qruov-spec-round2-web.pdf,,QR-UOV 是把 UOV 签名嵌入商环结构的多变量方案：通过将 Fq[x]/(f) 映射为矩阵压缩公钥并在 QROM 下给出 EUF-CMA 证明，安全性依赖 UOV 难题与新增的 QR-MQ 假设（要求 f 取不可约以抵御结构攻击）；相较传统 UOV，公钥显著更小且签名与验证保持短时延，与格基方案相比公钥通常更大但签名更短、验证更快。,正在接受 NIST 额外第二轮的评估。
 SNOVA,签名,多变量,Multivariate Quadratic (MQ) problem and Unbalanced Oil-and-Vinegar Indistinguishability (UOV-IND)  problem,Lih-Chung Wang 等,http://snova.pqclab.org/,https://github.com/open-quantum-safe/liboqs/tree/main/src/sig/snova,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-2/spec-files/snova-spec-round2-web.pdf,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-1/official-comments/SNOVA-round1-dig-sig-official-comment.pdf,SNOVA 是将 UOV 签名迁移到非交换矩阵环并结合“随机性对齐”压缩公钥的改进型多变量方案，安全性基于多变量二次方程求解难度与对 UOV 结构的恢复/伪造攻击不可行的假设；第二轮通过改造公共映射与参数（含新增 l=5）在保证安全的同时把公钥做到了约 1 KB、签名约 250 B 且验证较快；与格基/哈希基相比通常公钥偏大但签名更短、验证更快，而较传统 UOV 则以适度复杂度换取显著更小的公钥。,正在接受 NIST 额外第二轮的评估。
-UOV,签名,多变量,,Ward Beullens 等,https://www.uovsig.org/,https://github.com/open-quantum-safe/liboqs/tree/main/src/sig/uov,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-2/spec-files/uov-spec-round2-web.pdf,,,正在接受 NIST 额外第二轮的评估。
-FAEST,签名,哈希,,Carsten Baum 等,https://faest.info/,,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-2/spec-files/faest-spec-round2-web.pdf,,,正在接受 NIST 额外第二轮的评估。
+UOV,签名,多变量,Multivariate Quadratic (MQ) problem and Unbalanced Oil-and-Vinegar (UOV)  problem,Ward Beullens 等,https://www.uovsig.org/,https://github.com/open-quantum-safe/liboqs/tree/main/src/sig/uov,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-2/spec-files/uov-spec-round2-web.pdf,,UOV 是一种不平衡油-醋（Unbalanced Oil-and-Vinegar）多变量签名：采用哈希-签名范式，以陷门多变量二次映射为核心，安全性建立在多变量二次方程（MQ）求解困难与 UOV 公钥映射不可逆的假设上；性能上拥有更短签名、更快签名与与 Dilithium 相当且快于 Falcon/SPHINCS+ 的验证，但公钥显著更大（经典 L1 约 272KB，压缩版可降至约 43KB 但验证变慢）。,正在接受 NIST 额外第二轮的评估。
+FAEST,签名,哈希,Pseudorandomness Assumption for AES and Hash Function,Carsten Baum 等,https://faest.info/,https://github.com/faest-sign,https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/round-2/spec-files/faest-spec-round2-web.pdf,,FAEST 是一种基于对称密码的一次性函数并结合 VOLE in the Head 与 QuickSilver 证明的后量子签名，安全性在随机预言机与量子随机预言机模型下主要依赖 AES 与哈希等对称原语及 VOLEitH 的安全性质；与 Picnic、Banquet 等方案相比，FAEST 签名更紧凑、验证更快，且实现只需标准 AES 和 SHAKE。,正在接受 NIST 额外第二轮的评估。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
