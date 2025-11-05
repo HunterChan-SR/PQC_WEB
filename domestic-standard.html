@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -7,21 +8,302 @@
     <meta name="description" content="国内标准：后量子密码分析与制标工作">
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="static/css/all.min.css">
+    <style>
+        main {
+            padding: 4rem 1.5rem 2rem !important;
+            max-width: 1400px !important;
+        }
+
+        .cyber-card {
+            padding: 1.5rem !important;
+            margin: 1.5rem 0 !important;
+            max-width: 100% !important;
+        }
+
+        .cyber-card h2 {
+            font-size: 1.8rem !important;
+            margin-bottom: 1rem !important;
+        }
+
+        .news-section {
+            background: var(--card-bg);
+            padding: 1.2rem 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .news-section h3 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .news-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .news-list li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .news-list a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .news-list a:hover {
+            text-decoration: underline;
+        }
+
+        .domestic-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1000px) {
+            .domestic-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 复用国际页的 accordion 样式 */
+        .algorithm-accordion {
+            margin-bottom: 0.6rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .algorithm-header {
+            background: #f8f9fa;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            user-select: none;
+        }
+
+        .algorithm-header:hover {
+            background: #e9ecef;
+        }
+
+        .algorithm-header.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .algorithm-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .algorithm-header.active .accordion-icon {
+            transform: rotate(180deg);
+            color: white;
+        }
+
+        .algorithm-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: white;
+        }
+
+        .algorithm-content.active {
+            max-height: 5000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .algorithm-details {
+            padding: 1rem;
+            line-height: 1.7;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .detail-value {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .team-header {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .team-header i {
+            color: var(--secondary-color);
+        }
+
+        /* 折叠区块 */
+        .algorithm-accordion {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+
+        .algorithm-header {
+            padding: 0.8rem 1rem;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s;
+            user-select: none;
+        }
+
+        .algorithm-header:hover {
+            background: #e9ecef;
+        }
+
+        .algorithm-header.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            color: var(--secondary-color);
+        }
+
+        .algorithm-header.active .accordion-icon {
+            transform: rotate(180deg);
+            color: white;
+        }
+
+        .algorithm-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+
+        .algorithm-content.active {
+            max-height: 1000px;
+            transition: max-height 0.5s ease;
+        }
+
+        .algorithm-details {
+            padding: 1rem;
+            line-height: 1.7;
+        }
+
+        .detail-item {
+            margin-bottom: 0.8rem;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .detail-value {
+            color: #555;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        /* algorithmName, purpose, hardProblemType 同行显示 */
+        .algorithm-name-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .algorithm-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        /* purpose 彩色标签 */
+        .algorithm-purpose-tag {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+
+        .algorithm-purpose-tag.sign {
+            background-color: #ffeaea;
+            color: #e53935;
+        }
+
+        .algorithm-header.active .algorithm-purpose-tag.sign {
+            background-color: #e53935;
+            color: #fff;
+        }
+
+        .algorithm-purpose-tag.default {
+            background-color: #e6f3ff;
+            color: #1e88e5;
+        }
+
+        .algorithm-header.active .algorithm-purpose-tag.default {
+            background-color: #1e88e5;
+            color: #fff;
+        }
+
+        /* hardProblemType 灰色标签 */
+        .algorithm-problem-tag {
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: #f1f1f1;
+            color: #666;
+            font-size: 0.75rem;
+        }
+
+        .algorithm-header.active .algorithm-problem-tag {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+    </style>
 </head>
+
 <body>
     <!-- 导航栏 -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo-section" data-page="home" onclick="goToHome()">
-                <div class="logo-section" data-page="home" onclick="goToHome()">
-                    <img src="static/picture/logo.png" alt="Logo" class="logo-image">
-                    <span class="logo-text">后量子密码</span>
-                </div>
+                <img src="static/picture/logo.png" alt="Logo" class="logo-image">
+                <span class="logo-text">后量子密码</span>
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="nav-link">首页</a></li>
                 <li><a href="international-standard.html" class="nav-link">国际标准</a></li>
-                <li><a href="domestic-standard.html" class="nav-link  active" >国内标准</a></li>
+                <li><a href="domestic-standard.html" class="nav-link active">国内标准</a></li>
             </ul>
             <button class="mobile-menu-toggle" id="mobileMenuToggle">
                 <i class="fas fa-bars"></i>
@@ -30,118 +312,200 @@
     </nav>
 
     <main>
-        <div class="cyber-card" style="margin-top: 4rem;">
-            <h2><i class="fas fa-flag"></i>国内标准</h2>
-            
-            <section style="margin: 2rem 0;">
-                <h3 style="color: var(--primary-color); margin-bottom: 1.5rem;">
-                    <i class="fas fa-book"></i> 标准介绍
-                </h3>
-                <p style="line-height: 1.8; color: var(--text-color); margin-bottom: 1.5rem;">
-                    国内标准页面致力于展示符合中国国家标准和行业规范的后量子密码技术标准、评估方法和实施指南。
-                </p>
-                
-                <div style="background: rgba(52, 152, 219, 0.05); padding: 2rem; border-radius: var(--border-radius); margin: 2rem 0;">
-                    <h4 style="color: var(--secondary-color); margin-bottom: 1rem;">
-                        <i class="fas fa-list"></i> 主要内容
-                    </h4>
-                    <ul style="line-height: 2; padding-left: 2rem;">
-                        <li>国家标准（GB）相关规范</li>
-                        <li>行业标准与最佳实践</li>
-                        <li>国内密码算法评估标准</li>
-                        <li>合规性要求和认证流程</li>
-                    </ul>
-                </div>
-            </section>
+        <!-- 国内进展 -->
+        <div class="cyber-card">
+            <h2><i class="fas fa-newspaper"></i> 国内进展</h2>
+            <div class="news-section">
+                <h3><i class="fas fa-bullhorn"></i> 最新动态</h3>
+                <ul class="news-list">
+                    <li><a href="#">[2025-09] 国家密码管理局组织召开后量子密码标准研讨会</a></li>
+                    <li><a href="#">[2025-08] 王小云院士团队提出基于多项式格的高效签名方案</a></li>
+                    <li><a href="#">[2025-07] 郁昱团队发布国产后量子公钥库 PQC-China v2.0</a></li>
+                    <li><a href="#">[2025-06] 国内首个后量子密码测试平台上线运行</a></li>
+                </ul>
+            </div>
+        </div>
 
-            <section style="margin: 2rem 0;">
-                <h3 style="color: var(--primary-color); margin-bottom: 1.5rem;">
-                    <i class="fas fa-info-circle"></i> 更多信息
-                </h3>
-                <p style="line-height: 1.8; color: var(--text-color);">
-                    本页面将持续更新国内后量子密码标准的最新动态和详细内容。
-                </p>
-            </section>
+        <!-- 团队进展 -->
+        <div class="cyber-card">
+            <h2><i class="fas fa-users"></i> 国内主要研究团队</h2>
+
+            <div class="domestic-container">
+                <div class="review-phase">
+                    <div class="team-header"><i class="fas fa-user-tie"></i> 王小云团队 (wxy)</div>
+                    <div id="wxy-list"></div>
+                </div>
+
+                <div class="review-phase">
+                    <div class="team-header"><i class="fas fa-user-tie"></i> 路献辉团队 (lxh)</div>
+                    <div id="lxh-list"></div>
+                </div>
+
+                <div class="review-phase">
+                    <div class="team-header"><i class="fas fa-user-tie"></i> 郁昱团队 (yy)</div>
+                    <div id="yy-list"></div>
+                </div>
+
+                <div class="review-phase">
+                    <div class="team-header"><i class="fas fa-user-tie"></i> 赵运磊团队 (zyl)</div>
+                    <div id="zyl-list"></div>
+                </div>
+            </div>
         </div>
     </main>
 
     <script>
-        // 移动端菜单控制
-        function setupMobileMenu() {
-            const menuToggle = document.getElementById('mobileMenuToggle');
-            const navLinks = document.getElementById('navLinks');
-
-            if (!menuToggle || !navLinks) {
-                return;
-            }
-
-            menuToggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const isActive = navLinks.classList.contains('active');
-                
-                if (isActive) {
-                    navLinks.classList.remove('active');
-                } else {
-                    navLinks.classList.add('active');
-                }
-            });
-
-            navLinks.addEventListener('click', (e) => {
-                if (e.target.classList.contains('nav-link')) {
-                    navLinks.classList.remove('active');
-                }
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
-                    if (navLinks.classList.contains('active')) {
-                        navLinks.classList.remove('active');
-                    }
-                }
-            });
+        function goToHome() {
+            window.location.href = 'index.html';
         }
 
-        // 导航栏滚动隐藏控制
-        let scrollTimeout;
-        function setupSmartNavbar() {
-            const navbar = document.querySelector('.navbar');
+        function toggleAlgorithm(header) {
+            const content = header.nextElementSibling;
+            const active = header.classList.toggle('active');
+            if (active) {
+                content.classList.add('active');
+            } else {
+                content.classList.remove('active');
+            }
+        }
 
-            window.addEventListener('scroll', () => {
-                if (scrollTimeout) {
-                    clearTimeout(scrollTimeout);
-                }
+        function createAlgorithmHTML(algorithm) {
+            const name = algorithm.algorithmName || "未命名算法";
+            const type = algorithm.hardProblemType || "未知类型";
 
-                const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
-                if (currentScrollTop <= 10) {
-                    navbar.classList.remove('hidden');
-                    navbar.classList.remove('scrolled');
-                } else {
-                    navbar.classList.add('hidden');
-                    if (currentScrollTop > 50) {
-                        navbar.classList.add('scrolled');
+            // 颜色分类
+            let purposeClass = "default";
+            if (algorithm.purpose?.includes("加密")) purposeClass = "encrypt";
+            else if (algorithm.purpose?.includes("签名")) purposeClass = "sign";
+
+            const purpose = algorithm.purpose
+                ? `<span class="algorithm-purpose-tag ${purposeClass}">${algorithm.purpose}</span>`
+                : "";
+            const hardProblemType = algorithm.hardProblemType
+                ? `<span class="algorithm-problem-tag">${algorithm.hardProblemType}</span>`
+                : "";
+
+            let commentsHTML = "";
+            if (algorithm.allComments) {
+                const commentLinks = algorithm.allComments
+                    .split(/\r?\n+/)
+                    .map(link => link.trim())
+                    .filter(link => link)
+                    .map(link => `<li><a href="${link}" target="_blank">${link}</a></li>`)
+                    .join("");
+                commentsHTML = `
+            <div class="detail-item">
+                <div class="detail-label"><i class="fas fa-comments"></i>所有评论</div>
+                <ul class="detail-value comment-list">${commentLinks}</ul>
+            </div>`;
+            }
+
+            return `
+        <div class="algorithm-accordion">
+          <div class="algorithm-header" onclick="toggleAlgorithm(this)">
+            <div class="algorithm-name-line">
+              <span class="algorithm-name">${name}</span>
+              ${purpose}
+              ${hardProblemType}
+            </div>
+            <i class="fas fa-chevron-down accordion-icon"></i>
+          </div>
+          <div class="algorithm-content">
+            <div class="algorithm-details">
+              ${algorithm.hardProblem ? `
+              <div class="detail-item">
+                <div class="detail-label"><i class="fas fa-cubes"></i>具体困难问题</div>
+                <div class="detail-value">${algorithm.hardProblem}</div>
+              </div>` : ''}
+
+              ${algorithm.author ? `
+              <div class="detail-item">
+                <div class="detail-label"><i class="fas fa-user"></i>作者团队</div>
+                <div class="detail-value">${algorithm.author}</div>
+              </div>` : ''}
+
+              ${algorithm.officialSite ? `
+              <div class="detail-item">
+                <div class="detail-label"><i class="fas fa-globe"></i>官网链接</div>
+                <div class="detail-value"><a href="${algorithm.officialSite}" target="_blank">${algorithm.officialSite}</a></div>
+              </div>` : ''}
+
+                ${algorithm.sourceCode ? `
+                <div class="detail-item">
+                    <div class="detail-label"><i class="fas fa-code"></i>源代码链接</div>
+                    <div class="detail-value"><a href="${algorithm.sourceCode}" target="_blank">${algorithm.sourceCode}</a></div>
+                </div>` : ''}
+
+                ${algorithm.standardDoc ? `
+                <div class="detail-item">
+                    <div class="detail-label"><i class="fas fa-file-alt"></i>标准化文件连接</div>
+                    <div class="detail-value"><a href="${algorithm.standardDoc}" target="_blank">${algorithm.standardDoc}</a></div>
+                </div>` : ''}
+
+                ${commentsHTML}
+
+                ${algorithm.description ? `
+                <div class="detail-item">
+                    <div class="detail-label"><i class="fas fa-info-circle"></i>算法特色简介</div>
+                    <div class="detail-value">${algorithm.description}</div>
+                </div>` : ''}
+
+                ${algorithm.progress ? `
+                <div class="detail-item">
+                    <div class="detail-label"><i class="fas fa-forward"></i>算法后续进展</div>
+                    <div class="detail-value">${algorithm.progress}</div>
+                </div>` : ''}
+
+
+
+
+
+
+            </div>
+          </div>
+        </div>
+      `;
+        }
+
+        async function loadDomesticData() {
+            const basePath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+
+
+            const paths = [
+                basePath + 'static/data/algorithms.json',
+                'static/data/algorithms.json',
+                './static/data/algorithms.json',
+                '/static/data/algorithms.json'
+            ];
+
+            let data = null;
+            for (const path of paths) {
+                try {
+                    const res = await fetch(path);
+                    if (res.ok) {
+                        data = await res.json();
+                        break;
                     }
-                }
+                } catch { }
+            }
 
-                scrollTimeout = setTimeout(() => {
-                    // 滚动结束逻辑
-                }, 100);
-            }, { passive: true });
+            if (!data) return;
+
+            const teams = ['wxy', 'lxh', 'yy', 'zyl'];
+            teams.forEach(team => {
+                const container = document.getElementById(`${team}-list`);
+                if (data[team]) {
+                    container.innerHTML = data[team].map(a => createAlgorithmHTML(a)).join('');
+                } else {
+                    container.innerHTML = `<p style="color:#888;">暂无数据</p>`;
+                }
+            });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            setupMobileMenu();
-            setupSmartNavbar();
+            loadDomesticData();
         });
-        function goToHome() {
-            window.location.href = 'index.html';
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
     </script>
 </body>
+
 </html>
